@@ -1,1 +1,1 @@
-# chess
+This website will provide users with the ability to play chess against each other
