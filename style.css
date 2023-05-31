@@ -1,0 +1,27 @@
+#chessboard {
+    position: relative;
+    top: 50%;
+    width: 75%;
+    height: 75%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.square1{
+    background-color: darkgreen;
+    height: 50px;
+    width: 50px;
+    border: none;
+}
+
+.square2{
+    background-color: rgb(10, 15, 10);
+    height: 50px;
+    width: 50px;
+    border: none;
+}
+
+.icons{
+    width: 100%; 
+    height: auto;
+}
