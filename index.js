@@ -65,8 +65,8 @@ function handleDrop(event) {
     let square = document.getElementById(data.substring(0,data.indexOf(":") - 1));
     let icon = data.substring(data.indexOf(":") + 1);
     let piece = icon.substring(icon.indexOf(".svg")-2,icon.indexOf(".svg"));
+    let target = document.getElementById(this.id);
     if(legalMove()){
-        let target = document.getElementById(this.id);
         square.getElementsByTagName("img")[0].src = "";
         target.getElementsByTagName("img")[0].src = icon;
         if(whitesTurn){
@@ -80,8 +80,52 @@ function handleDrop(event) {
     
     function legalMove() {
         // Checks if the person whose turn it is is moving
-        if(whitesTurn && piece.substring(1) === "b" || !whitesTurn && piece.substring(1) === "w") {
+        if(whitesTurn && piece.substring(1) === "b" || !whitesTurn && piece.substring(1) === "w" || icon.includes("empty")) {
             return false;
+        }
+
+        // Gets the original position and ending position of the moving piece
+        let positionXOriginal = square.id.substring(0).charCodeAt(0)-97;
+        let positionYOriginal = square.id.substring(1) - 1;
+
+        let positionXEnding = target.id.substring(0).charCodeAt(0)-97;
+        let positionYEnding = target.id.substring(1) - 1;
+
+        if(piece === "bb") {
+            
+        }
+        else if(piece === "bw") {
+            
+        }
+        else if(piece === "kb") {
+
+        }
+        else if(piece === "kw") {
+
+        }
+        else if(piece === "nb") {
+
+        }
+        else if(piece === "nw") {
+
+        }
+        else if(piece === "pb") {
+
+        }
+        else if(piece === "pw") {
+
+        }
+        else if(piece === "qb") {
+
+        }
+        else if(piece === "qw") {
+
+        }
+        else if(piece === "rb") {
+
+        }
+        else{
+
         }
 
         return true;
