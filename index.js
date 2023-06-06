@@ -1,6 +1,7 @@
-//Grab the squares and the icons
+//Grab the squares and the icons, and set the turn to whites
 let squares = document.getElementsByClassName("squares");
 let icons = document.getElementsByClassName("icons");
+let whitesTurn = true;
 
 
 // Initialize the chess board as an array and add eventListeners for squares
@@ -22,7 +23,7 @@ for(let i = 0 ; i < 8 ; i++) {
 }
 
 // eventListener Functions
-function handleClick(event) {
+function handleClick() {
     let target = document.getElementById(this.id);
     if(target.style.backgroundColor == "red"){
         if(target.getAttribute("class").includes("square1")) {
@@ -37,16 +38,18 @@ function handleClick(event) {
     }
 }
 
-function handleDragStart(event) {
-    let target = document.getElementById(this.id);
-    target.style.backgroundColor = "grey";
+function handleDragStart() {
+    let square = document.getElementById(this.id);
+    let icon = square.getElementsByTagName("img")[0].src;
+    square.style.backgroundColor = "grey";
+    event.dataTransfer.setData('text/plain',square.id + " : " + icon)
 }
 
 function handleDragOver(event) {
-    // Nothing necessary
+    event.preventDefault();
 }
 
-function handleDragEnd(event) {
+function handleDragEnd() {
     let target = document.getElementById(this.id);
     if(target.getAttribute("class").includes("square1")) {
         target.style.backgroundColor = "darkgreen";
@@ -58,7 +61,31 @@ function handleDragEnd(event) {
 
 function handleDrop(event) {
     event.preventDefault();
-    console.log("1");
+    let data = event.dataTransfer.getData('text/plain');
+    let square = document.getElementById(data.substring(0,data.indexOf(":") - 1));
+    let icon = data.substring(data.indexOf(":") + 1);
+    let piece = icon.substring(icon.indexOf(".svg")-2,icon.indexOf(".svg"));
+    if(legalMove()){
+        let target = document.getElementById(this.id);
+        square.getElementsByTagName("img")[0].src = "";
+        target.getElementsByTagName("img")[0].src = icon;
+        if(whitesTurn){
+            document.getElementById("move-indicator").innerHTML = "Black to move!"
+        }
+        else{
+            document.getElementById("move-indicator").innerHTML = "White to move!"
+        }
+        whitesTurn = !whitesTurn;
+    }
+    
+    function legalMove() {
+        // Checks if the person whose turn it is is moving
+        if(whitesTurn && piece.substring(1) === "b" || !whitesTurn && piece.substring(1) === "w") {
+            return false;
+        }
+
+        return true;
+    }
 }
 
 
