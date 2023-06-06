@@ -1,3 +1,7 @@
+body{
+    background-color: rgb(63, 79, 83);
+}
+
 #chessboard {
     display: flex;
     justify-content: center;
