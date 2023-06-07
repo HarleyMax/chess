@@ -1,8 +1,16 @@
 //Grab the squares and the icons, and set the turn to whites
-let squares = document.getElementsByClassName("squares");
+let squaresRows = [...document.getElementsByTagName("tr")].reverse();
+let squares = []
+for(let i = 0 ; i < 8 ; i++) {
+    let row = [...squaresRows[i].getElementsByTagName("th")];
+    squares = squares.concat(row);
+}
 let icons = document.getElementsByClassName("icons");
 let whitesTurn = true;
 
+// This will keep track if an en pessant square is open to move to
+let enPessant = "";
+let movesSinceEnPessantOpened = 0;
 
 // Initialize the chess board as an array and add eventListeners for squares
 let board = new Array(8);
@@ -12,12 +20,12 @@ for (let i = 0; i < board.length; i++) {
   }
 for(let i = 0 ; i < 8 ; i++) {
     for(let j = 0 ; j < 8 ; j++) {
-        board[i][j] = squares[currIndex];
-        board[i][j].addEventListener('click', handleClick);
-        board[i][j].addEventListener('dragstart', handleDragStart);
-        board[i][j].addEventListener('dragover', handleDragOver);
-        board[i][j].addEventListener('dragend', handleDragEnd);
-        board[i][j].addEventListener('drop', handleDrop);
+        board[j][i] = squares[currIndex];
+        board[j][i].addEventListener('click', handleClick);
+        board[j][i].addEventListener('dragstart', handleDragStart);
+        board[j][i].addEventListener('dragover', handleDragOver);
+        board[j][i].addEventListener('dragend', handleDragEnd);
+        board[j][i].addEventListener('drop', handleDrop);
         currIndex++;
     }
 }
@@ -67,7 +75,7 @@ function handleDrop(event) {
     let piece = icon.substring(icon.indexOf(".svg")-2,icon.indexOf(".svg"));
     let target = document.getElementById(this.id);
     if(legalMove()){
-        square.getElementsByTagName("img")[0].src = "";
+        square.getElementsByTagName("img")[0].src = "/piece-icons/empty.svg";
         target.getElementsByTagName("img")[0].src = icon;
         if(whitesTurn){
             document.getElementById("move-indicator").innerHTML = "Black to move!"
@@ -79,6 +87,8 @@ function handleDrop(event) {
     }
     
     function legalMove() {
+        let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+        let targetPiece = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
         // Checks if the person whose turn it is is moving
         if(whitesTurn && piece.substring(1) === "b" || !whitesTurn && piece.substring(1) === "w" || icon.includes("empty")) {
             return false;
@@ -91,11 +101,96 @@ function handleDrop(event) {
         let positionXEnding = target.id.substring(0).charCodeAt(0)-97;
         let positionYEnding = target.id.substring(1) - 1;
 
-        if(piece === "bb") {
-            
+        // Checks if the move is legal based on what piece is being moved
+        if(piece === "pw") {
+            if(enPessant === target.id && movesSinceEnPessantOpened === 1) {
+                enPessant = "";
+                movesSinceEnPessantOpened = 0;
+                let column = target.id[0];
+                let row = target.id[1] - 1;
+                let iconToBeRemoved = String.fromCharCode(column.charCodeAt(0)) + row.toString();
+                document.getElementById(iconToBeRemoved).getElementsByTagName("img")[0].src = "/piece-icons/empty.svg";
+                return true;
+            }
+            let squareOneAbove = document.getElementById(board[positionXOriginal][positionYOriginal+1].id)
+            let temp2 = document.getElementById(board[positionXOriginal][positionYOriginal+1].id).getElementsByTagName("img")[0].src;
+            let pieceOneAbove = temp2.substring(temp2.indexOf(".svg")-2,temp2.indexOf(".svg"));
+            if(targetPiece === "ty") {
+                if(positionYOriginal === 1){
+                    if(positionYEnding - positionYOriginal != 1 && positionYEnding - positionYOriginal != 2) {
+                        return false;
+                    }
+                    if(pieceOneAbove !== "ty") {
+                        return false;
+                    }
+                    enPessant = squareOneAbove.id;
+                    if(positionYEnding - positionYOriginal === 2) {
+                        movesSinceEnPessantOpened = 0;
+                    }
+                }
+                else{
+                    if(positionYEnding - positionYOriginal != 1) {
+                        return false;
+                    }
+                }
+                if(positionXOriginal != positionXEnding) {
+                    return false
+                }
+            }
+            else{
+                if(positionYEnding - positionYOriginal != 1 || (positionXEnding - positionXOriginal != 1 && (positionXEnding - positionXOriginal != -1))) {
+                    return false
+                }
+            }
+        }
+        else if(piece === "pb") {
+            if(enPessant === target.id && movesSinceEnPessantOpened === 1) {
+                enPessant = "";
+                movesSinceEnPessantOpened = 0;
+                let column = target.id[0];
+                let row = parseInt(target.id[1]) + 1;
+                let iconToBeRemoved = String.fromCharCode(column.charCodeAt(0)) + row.toString();
+                console.log(iconToBeRemoved);
+                document.getElementById(iconToBeRemoved).getElementsByTagName("img")[0].src = "/piece-icons/empty.svg";
+                return true;
+            }
+            let squareOneBelow = document.getElementById(board[positionXOriginal][positionYOriginal-1].id)
+            let temp2 = document.getElementById(board[positionXOriginal][positionYOriginal-1].id).getElementsByTagName("img")[0].src;
+            let pieceOneBelow = temp2.substring(temp2.indexOf(".svg")-2,temp2.indexOf(".svg"));
+            if(targetPiece === "ty") {
+                if(positionYOriginal === 6){
+                    if(positionYEnding - positionYOriginal != -1 && positionYEnding - positionYOriginal != -2) {
+                        return false;
+                    }
+                    if(pieceOneBelow !== "ty") {
+                        return false;
+                    }
+                    enPessant = squareOneBelow.id;
+                    if(positionYEnding - positionYOriginal === -2) {
+                        movesSinceEnPessantOpened = 0;
+                    }
+                }
+                else{
+                    if(positionYEnding - positionYOriginal != -1) {
+                        return false;
+                    }
+                }
+                if(positionXOriginal != positionXEnding) {
+                    return false
+                }
+            }
+            else{
+                if(positionYEnding - positionYOriginal != -1 || (positionXEnding - positionXOriginal != 1 && (positionXEnding - positionXOriginal != -1))) {
+                    return false
+                }
+            }
+        }
+
+        else if(piece === "bb") {
+                
         }
         else if(piece === "bw") {
-            
+                
         }
         else if(piece === "kb") {
 
@@ -109,12 +204,7 @@ function handleDrop(event) {
         else if(piece === "nw") {
 
         }
-        else if(piece === "pb") {
-
-        }
-        else if(piece === "pw") {
-
-        }
+        
         else if(piece === "qb") {
 
         }
@@ -127,9 +217,10 @@ function handleDrop(event) {
         else{
 
         }
-
+        movesSinceEnPessantOpened++;
+        console.log(movesSinceEnPessantOpened);
         return true;
-    }
+        }
 }
 
 
