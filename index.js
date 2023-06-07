@@ -150,7 +150,6 @@ function handleDrop(event) {
                 let column = target.id[0];
                 let row = parseInt(target.id[1]) + 1;
                 let iconToBeRemoved = String.fromCharCode(column.charCodeAt(0)) + row.toString();
-                console.log(iconToBeRemoved);
                 document.getElementById(iconToBeRemoved).getElementsByTagName("img")[0].src = "/piece-icons/empty.svg";
                 return true;
             }
@@ -186,39 +185,69 @@ function handleDrop(event) {
             }
         }
 
-        else if(piece === "bb") {
-                
+        else if(piece === "nw") {
+            let corrOrientation1 = positionYEnding - positionYOriginal == 2 && positionXEnding - positionXOriginal == 1;
+            let corrOrientation2 = positionYEnding - positionYOriginal == 1 && positionXEnding - positionXOriginal == 2;
+            let corrOrientation3 = positionYEnding - positionYOriginal == -1 && positionXEnding - positionXOriginal == 2;
+            let corrOrientation4 = positionYEnding - positionYOriginal == -2 && positionXEnding - positionXOriginal == 1;
+            let corrOrientation5 = positionYEnding - positionYOriginal == -2 && positionXEnding - positionXOriginal == -1;
+            let corrOrientation6 = positionYEnding - positionYOriginal == -1 && positionXEnding - positionXOriginal == -2;
+            let corrOrientation7 = positionYEnding - positionYOriginal == 1 && positionXEnding - positionXOriginal == -2;
+            let corrOrientation8 = positionYEnding - positionYOriginal == 2 && positionXEnding - positionXOriginal == -1;
+            let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+            let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+            let ownPiece = colorOfLandingPiece === "w";
+            if(!(corrOrientation1 | corrOrientation2 | corrOrientation3 | corrOrientation4 | corrOrientation5 | corrOrientation6 | corrOrientation7 | corrOrientation8) | ownPiece) return false;
         }
+
+        else if(piece === "nb") {
+            let corrOrientation1 = positionYEnding - positionYOriginal == 2 && positionXEnding - positionXOriginal == 1;
+            let corrOrientation2 = positionYEnding - positionYOriginal == 1 && positionXEnding - positionXOriginal == 2;
+            let corrOrientation3 = positionYEnding - positionYOriginal == -1 && positionXEnding - positionXOriginal == 2;
+            let corrOrientation4 = positionYEnding - positionYOriginal == -2 && positionXEnding - positionXOriginal == 1;
+            let corrOrientation5 = positionYEnding - positionYOriginal == -2 && positionXEnding - positionXOriginal == -1;
+            let corrOrientation6 = positionYEnding - positionYOriginal == -1 && positionXEnding - positionXOriginal == -2;
+            let corrOrientation7 = positionYEnding - positionYOriginal == 1 && positionXEnding - positionXOriginal == -2;
+            let corrOrientation8 = positionYEnding - positionYOriginal == 2 && positionXEnding - positionXOriginal == -1;
+            let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+            let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+            let ownPiece = colorOfLandingPiece === "b";
+            if(!(corrOrientation1 | corrOrientation2 | corrOrientation3 | corrOrientation4 | corrOrientation5 | corrOrientation6 | corrOrientation7 | corrOrientation8) | ownPiece) return false;
+        }
+
         else if(piece === "bw") {
                 
         }
-        else if(piece === "kb") {
 
+        else if(piece === "bb") {
+                
         }
+
         else if(piece === "kw") {
 
         }
-        else if(piece === "nb") {
+
+        else if(piece === "kb") {
 
         }
-        else if(piece === "nw") {
+
+        else if(piece === "qw") {
 
         }
         
         else if(piece === "qb") {
 
         }
-        else if(piece === "qw") {
+
+    
+        else if(piece === "rw") {
 
         }
-        else if(piece === "rb") {
 
-        }
-        else{
+        else {
 
         }
         movesSinceEnPessantOpened++;
-        console.log(movesSinceEnPessantOpened);
         return true;
         }
 }
