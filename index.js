@@ -75,7 +75,7 @@ function handleDrop(event) {
     let piece = icon.substring(icon.indexOf(".svg")-2,icon.indexOf(".svg"));
     let target = document.getElementById(this.id);
     if(legalMove()){
-        square.getElementsByTagName("img")[0].src = "/piece-icons/empty.svg";
+        square.getElementsByTagName("img")[0].src = "piece-icons/empty.svg";
         target.getElementsByTagName("img")[0].src = icon;
         if(whitesTurn){
             document.getElementById("move-indicator").innerHTML = "Black to move!"
@@ -109,7 +109,7 @@ function handleDrop(event) {
                 let column = target.id[0];
                 let row = target.id[1] - 1;
                 let iconToBeRemoved = String.fromCharCode(column.charCodeAt(0)) + row.toString();
-                document.getElementById(iconToBeRemoved).getElementsByTagName("img")[0].src = "/piece-icons/empty.svg";
+                document.getElementById(iconToBeRemoved).getElementsByTagName("img")[0].src = "piece-icons/empty.svg";
                 return true;
             }
             let squareOneAbove = document.getElementById(board[positionXOriginal][positionYOriginal+1].id)
@@ -150,7 +150,7 @@ function handleDrop(event) {
                 let column = target.id[0];
                 let row = parseInt(target.id[1]) + 1;
                 let iconToBeRemoved = String.fromCharCode(column.charCodeAt(0)) + row.toString();
-                document.getElementById(iconToBeRemoved).getElementsByTagName("img")[0].src = "/piece-icons/empty.svg";
+                document.getElementById(iconToBeRemoved).getElementsByTagName("img")[0].src = "piece-icons/empty.svg";
                 return true;
             }
             let squareOneBelow = document.getElementById(board[positionXOriginal][positionYOriginal-1].id)
