@@ -12,6 +12,12 @@ let whitesTurn = true;
 let enPessant = "";
 let movesSinceEnPessantOpened = 0;
 
+//This will keep track if certain castling moves can still occur
+let whiteShortCastle = true;
+let whiteLongCastle = true;
+let blackShortCastle = true;
+let blackLongCastle = true;
+
 // Initialize the chess board as an array and add eventListeners for squares
 let board = new Array(8);
 let currIndex = 0;
@@ -86,6 +92,7 @@ function handleDrop(event) {
         whitesTurn = !whitesTurn;
     }
     
+    //Determines if a move is legal for whichever piece is being moved
     function legalMove() {
         let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
         let targetPiece = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
@@ -360,10 +367,30 @@ function handleDrop(event) {
         }
 
         else if(piece === "kw") {
+            let temp1 = document.getElementById("c1").getElementsByTagName("img")[0].src;
+            let emptyLeftBishopSquare = temp1.substring(temp1.indexOf(".svg")-2,temp1.indexOf(".svg")-0) === "ty";
+            let temp2 = document.getElementById("b1").getElementsByTagName("img")[0].src
+            let emptyLeftKnightSquare = temp2.substring(temp2.indexOf(".svg")-2,temp2.indexOf(".svg")-0) === "ty";
+            let temp3 = document.getElementById("d1").getElementsByTagName("img")[0].src
+            let emptyQueenSquare = temp3.substring(temp3.indexOf(".svg")-2,temp3.indexOf(".svg")-0) === "ty";
+            let temp4 = document.getElementById("f1").getElementsByTagName("img")[0].src
+            let emptyRightBishopSquare = temp4.substring(temp4.indexOf(".svg")-2,temp4.indexOf(".svg")-0) === "ty";
+            let temp5 = document.getElementById("g1").getElementsByTagName("img")[0].src
+            let emptyRightKnightSquare = temp5.substring(temp5.indexOf(".svg")-2,temp5.indexOf(".svg")-0) === "ty";
+
+            let emptyLeftCastlingArea = emptyLeftBishopSquare && emptyLeftKnightSquare && emptyQueenSquare;
+            let emptyRightCastlingArea = emptyRightBishopSquare && emptyRightKnightSquare;
+
             let movedXPosition = positionXEnding - positionXOriginal != 0
             let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
             let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
             let ownPiece = colorOfLandingPiece === "w";
+            if(target.id === "c1" && emptyLeftCastlingArea && whiteLongCastle) {
+                document.getElementById("e1").getElementsByTagName("img")[0].src = "piece-icons/empty.svg";
+                document.getElementById("a1").getElementsByTagName("img")[0].src = "piece-icons/empty.svg";
+                document.getElementById("c1").getElementsByTagName("img")[0].src = "piece-icons/kw.svg"
+                document.getElementById("d1").getElementsByTagName("img")[0].src = "piece-icons/rw.svg"
+            }
             if(ownPiece){
                 return false;
             }
@@ -377,6 +404,8 @@ function handleDrop(event) {
                     return false;
                 }
             }
+            whiteShortCastle = false;
+            whiteLongCastle = false;
         }
 
         else if(piece === "kb") {
@@ -397,6 +426,8 @@ function handleDrop(event) {
                     return false;
                 }
             }
+            blackShortCastle = false;
+            blackLongCastle = false;
         }
 
         else if(piece === "qw") {
@@ -876,6 +907,7 @@ function handleDrop(event) {
                  }
             }
         }
+
         movesSinceEnPessantOpened++;
         return true;
         }
