@@ -216,36 +216,665 @@ function handleDrop(event) {
         }
 
         else if(piece === "bw") {
-                
+            let endingXPositionMoreThanOriginalXPosition = positionXEnding > positionXOriginal;
+            let endingYPositionMoreThanOriginalYPosition = positionYEnding > positionYOriginal;
+            if(positionXEnding - positionYEnding != positionXOriginal - positionYOriginal && positionXOriginal + positionYOriginal != positionXEnding + positionYEnding) {
+                return false;
+            }
+            if(endingXPositionMoreThanOriginalXPosition && endingYPositionMoreThanOriginalYPosition) {
+                for(positionXOriginal = positionXOriginal + 1, positionYOriginal = positionYOriginal + 1  ; positionXOriginal < positionXEnding ; positionXOriginal++,positionYOriginal++) {
+                    let squareAtCurrIndex = document.getElementById(board[positionXOriginal][positionYOriginal].id)
+                    let temp = squareAtCurrIndex.getElementsByTagName("img")[0].src;
+                    let pieceAtCurrIndex = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                    if(pieceAtCurrIndex != "ty") {
+                        return false;
+                    }
+                }
+                let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                let ownPiece = colorOfLandingPiece === "w";
+                if(ownPiece){
+                    return false;
+                }
+            }
+            else if(endingXPositionMoreThanOriginalXPosition && !endingYPositionMoreThanOriginalYPosition) {
+                for(positionXOriginal = positionXOriginal + 1, positionYOriginal = positionYOriginal - 1  ; positionXOriginal < positionXEnding ; positionXOriginal++,positionYOriginal--) {
+                    let squareAtCurrIndex = document.getElementById(board[positionXOriginal][positionYOriginal].id)
+                    let temp = squareAtCurrIndex.getElementsByTagName("img")[0].src;
+                    let pieceAtCurrIndex = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                    if(pieceAtCurrIndex != "ty") {
+                        return false;
+                    }
+                }
+                let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                let ownPiece = colorOfLandingPiece === "w";
+                if(ownPiece){
+                    return false;
+                }
+            }
+            else if(!endingXPositionMoreThanOriginalXPosition && endingYPositionMoreThanOriginalYPosition) {
+                for(positionXOriginal = positionXOriginal - 1, positionYOriginal = positionYOriginal + 1  ; positionYOriginal < positionYEnding ; positionXOriginal--,positionYOriginal++) {
+                    let squareAtCurrIndex = document.getElementById(board[positionXOriginal][positionYOriginal].id)
+                    let temp = squareAtCurrIndex.getElementsByTagName("img")[0].src;
+                    let pieceAtCurrIndex = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                    if(pieceAtCurrIndex != "ty") {
+                        return false;
+                    }
+                }
+                let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                let ownPiece = colorOfLandingPiece === "w";
+                if(ownPiece){
+                    return false;
+                }
+            }
+            else{
+                for(positionXOriginal = positionXOriginal - 1, positionYOriginal = positionYOriginal - 1  ; positionXOriginal > positionXEnding ; positionXOriginal--,positionYOriginal--) {
+                    let squareAtCurrIndex = document.getElementById(board[positionXOriginal][positionYOriginal].id)
+                    let temp = squareAtCurrIndex.getElementsByTagName("img")[0].src;
+                    let pieceAtCurrIndex = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                    if(pieceAtCurrIndex != "ty") {
+                        return false;
+                    }
+                }
+                let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                let ownPiece = colorOfLandingPiece === "w";
+                if(ownPiece){
+                    return false;
+                }
+            }
         }
 
         else if(piece === "bb") {
-                
+            let endingXPositionMoreThanOriginalXPosition = positionXEnding > positionXOriginal;
+            let endingYPositionMoreThanOriginalYPosition = positionYEnding > positionYOriginal;
+            if(positionXEnding - positionYEnding != positionXOriginal - positionYOriginal && positionXOriginal + positionYOriginal != positionXEnding + positionYEnding) {
+                return false;
+            }
+            if(endingXPositionMoreThanOriginalXPosition && endingYPositionMoreThanOriginalYPosition) {
+                for(positionXOriginal = positionXOriginal + 1, positionYOriginal = positionYOriginal + 1  ; positionXOriginal < positionXEnding ; positionXOriginal++,positionYOriginal++) {
+                    let squareAtCurrIndex = document.getElementById(board[positionXOriginal][positionYOriginal].id)
+                    let temp = squareAtCurrIndex.getElementsByTagName("img")[0].src;
+                    let pieceAtCurrIndex = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                    if(pieceAtCurrIndex != "ty") {
+                        return false;
+                    }
+                }
+                let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                let ownPiece = colorOfLandingPiece === "b";
+                if(ownPiece){
+                    return false;
+                }
+            }
+            else if(endingXPositionMoreThanOriginalXPosition && !endingYPositionMoreThanOriginalYPosition) {
+                for(positionXOriginal = positionXOriginal + 1, positionYOriginal = positionYOriginal - 1  ; positionXOriginal < positionXEnding ; positionXOriginal++,positionYOriginal--) {
+                    let squareAtCurrIndex = document.getElementById(board[positionXOriginal][positionYOriginal].id)
+                    let temp = squareAtCurrIndex.getElementsByTagName("img")[0].src;
+                    let pieceAtCurrIndex = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                    if(pieceAtCurrIndex != "ty") {
+                        return false;
+                    }
+                }
+                let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                let ownPiece = colorOfLandingPiece === "b";
+                if(ownPiece){
+                    return false;
+                }
+            }
+            else if(!endingXPositionMoreThanOriginalXPosition && endingYPositionMoreThanOriginalYPosition) {
+                for(positionXOriginal = positionXOriginal - 1, positionYOriginal = positionYOriginal + 1  ; positionYOriginal < positionYEnding ; positionXOriginal--,positionYOriginal++) {
+                    let squareAtCurrIndex = document.getElementById(board[positionXOriginal][positionYOriginal].id)
+                    let temp = squareAtCurrIndex.getElementsByTagName("img")[0].src;
+                    let pieceAtCurrIndex = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                    if(pieceAtCurrIndex != "ty") {
+                        return false;
+                    }
+                }
+                let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                let ownPiece = colorOfLandingPiece === "b";
+                if(ownPiece){
+                    return false;
+                }
+            }
+            else{
+                for(positionXOriginal = positionXOriginal - 1, positionYOriginal = positionYOriginal - 1  ; positionXOriginal > positionXEnding ; positionXOriginal--,positionYOriginal--) {
+                    let squareAtCurrIndex = document.getElementById(board[positionXOriginal][positionYOriginal].id)
+                    let temp = squareAtCurrIndex.getElementsByTagName("img")[0].src;
+                    let pieceAtCurrIndex = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                    if(pieceAtCurrIndex != "ty") {
+                        return false;
+                    }
+                }
+                let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                let ownPiece = colorOfLandingPiece === "b";
+                if(ownPiece){
+                    return false;
+                }
+            }
         }
 
         else if(piece === "kw") {
-
+            let movedXPosition = positionXEnding - positionXOriginal != 0
+            let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+            let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+            let ownPiece = colorOfLandingPiece === "w";
+            if(ownPiece){
+                return false;
+            }
+            if(movedXPosition) {
+                if(!(positionXEnding - positionXOriginal != 1 | (positionYEnding - positionYOriginal != 0 | positionYEnding - positionYOriginal != 1))) {
+                    return false;
+                }
+            }
+            else{
+                if(!(positionXEnding - positionXOriginal != 1 | positionYEnding - positionYOriginal != 1)) {
+                    return false;
+                }
+            }
         }
 
         else if(piece === "kb") {
-
+            let movedXPosition = positionXEnding - positionXOriginal != 0
+            let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+            let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+            let ownPiece = colorOfLandingPiece === "b";
+            if(ownPiece){
+                return false;
+            }
+            if(movedXPosition) {
+                if(!(positionXEnding - positionXOriginal != 1 | (positionYEnding - positionYOriginal != 0 | positionYEnding - positionYOriginal != 1))) {
+                    return false;
+                }
+            }
+            else{
+                if(!(positionXEnding - positionXOriginal != 1 | positionYEnding - positionYOriginal != 1)) {
+                    return false;
+                }
+            }
         }
 
         else if(piece === "qw") {
-
+            if(positionXEnding == positionXOriginal || positionYEnding == positionYOriginal) {
+                let movedXPosition = positionXEnding - positionXOriginal != 0;
+            if(positionXEnding - positionXOriginal != 0 && positionYEnding - positionYOriginal != 0) {
+                return false;
+            }
+            if(movedXPosition){
+                let endingXPositionMoreThanOriginalXPosition = positionXEnding > positionXOriginal;
+                if(endingXPositionMoreThanOriginalXPosition) {
+                    let currXPosition = positionXOriginal + 1;
+                    for(currXPosition ; currXPosition < positionXEnding ; currXPosition++) {
+                        let squareAtCurrentPosition = document.getElementById(board[currXPosition][positionYOriginal].id)
+                        let temp = squareAtCurrentPosition.getElementsByTagName("img")[0].src;
+                        let pieceAtCurrentPosition = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                        console.log(pieceAtCurrentPosition);
+                        if(pieceAtCurrentPosition !== "ty") {
+                            return false;
+                        }
+                    }
+                    let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                    let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                    let ownPiece = colorOfLandingPiece === "w";
+                    console.log(ownPiece)
+                    if(ownPiece) {
+                        return false;
+                    }
+                 }
+                 else{
+                    let currXPosition = positionXOriginal - 1;
+                    for(currXPosition ; currXPosition > positionXEnding ; currXPosition--) {
+                        let squareAtCurrentPosition = document.getElementById(board[currXPosition][positionYOriginal].id)
+                        let temp = squareAtCurrentPosition.getElementsByTagName("img")[0].src;
+                        let pieceAtCurrentPosition = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                        if(pieceAtCurrentPosition !== "ty") {
+                            return false;
+                        }
+                    }
+                    let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                    let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                    let ownPiece = colorOfLandingPiece === "w";
+                    if(ownPiece) {
+                        return false;
+                    }
+                 }
+            }
+            else{
+                let endingYPositionMoreThanOriginalYPosition = positionYEnding > positionYOriginal;
+                if(endingYPositionMoreThanOriginalYPosition) {
+                    let currYPosition = positionYOriginal + 1;
+                    for(currYPosition ; currYPosition < positionYEnding ; currYPosition++) {
+                        let squareAtCurrentPosition = document.getElementById(board[positionXOriginal][currYPosition].id)
+                        let temp = squareAtCurrentPosition.getElementsByTagName("img")[0].src;
+                        let pieceAtCurrentPosition = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                        if(pieceAtCurrentPosition !== "ty") {
+                            return false;
+                        }
+                    }
+                    let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                    let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                    let ownPiece = colorOfLandingPiece === "w";
+                    if(ownPiece) {
+                        return false;
+                    }
+                 }
+                 else{
+                    let currYPosition = positionYOriginal - 1;
+                    for(currYPosition ; currYPosition > positionYEnding ; currYPosition--) {
+                        let squareAtCurrentPosition = document.getElementById(board[positionXOriginal][currYPosition].id)
+                        let temp = squareAtCurrentPosition.getElementsByTagName("img")[0].src;
+                        let pieceAtCurrentPosition = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                        if(pieceAtCurrentPosition !== "ty") {
+                            return false;
+                        }
+                    }
+                    let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                    let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                    let ownPiece = colorOfLandingPiece === "w";
+                    if(ownPiece) {
+                        return false;
+                    }
+                 }
+            }
+            }
+            else{
+                let endingXPositionMoreThanOriginalXPosition = positionXEnding > positionXOriginal;
+            let endingYPositionMoreThanOriginalYPosition = positionYEnding > positionYOriginal;
+            if(positionXEnding - positionYEnding != positionXOriginal - positionYOriginal && positionXOriginal + positionYOriginal != positionXEnding + positionYEnding) {
+                return false;
+            }
+            if(endingXPositionMoreThanOriginalXPosition && endingYPositionMoreThanOriginalYPosition) {
+                for(positionXOriginal = positionXOriginal + 1, positionYOriginal = positionYOriginal + 1  ; positionXOriginal < positionXEnding ; positionXOriginal++,positionYOriginal++) {
+                    let squareAtCurrIndex = document.getElementById(board[positionXOriginal][positionYOriginal].id)
+                    let temp = squareAtCurrIndex.getElementsByTagName("img")[0].src;
+                    let pieceAtCurrIndex = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                    if(pieceAtCurrIndex != "ty") {
+                        return false;
+                    }
+                }
+                let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                let ownPiece = colorOfLandingPiece === "w";
+                if(ownPiece){
+                    return false;
+                }
+            }
+            else if(endingXPositionMoreThanOriginalXPosition && !endingYPositionMoreThanOriginalYPosition) {
+                for(positionXOriginal = positionXOriginal + 1, positionYOriginal = positionYOriginal - 1  ; positionXOriginal < positionXEnding ; positionXOriginal++,positionYOriginal--) {
+                    let squareAtCurrIndex = document.getElementById(board[positionXOriginal][positionYOriginal].id)
+                    let temp = squareAtCurrIndex.getElementsByTagName("img")[0].src;
+                    let pieceAtCurrIndex = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                    if(pieceAtCurrIndex != "ty") {
+                        return false;
+                    }
+                }
+                let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                let ownPiece = colorOfLandingPiece === "w";
+                if(ownPiece){
+                    return false;
+                }
+            }
+            else if(!endingXPositionMoreThanOriginalXPosition && endingYPositionMoreThanOriginalYPosition) {
+                for(positionXOriginal = positionXOriginal - 1, positionYOriginal = positionYOriginal + 1  ; positionYOriginal < positionYEnding ; positionXOriginal--,positionYOriginal++) {
+                    let squareAtCurrIndex = document.getElementById(board[positionXOriginal][positionYOriginal].id)
+                    let temp = squareAtCurrIndex.getElementsByTagName("img")[0].src;
+                    let pieceAtCurrIndex = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                    if(pieceAtCurrIndex != "ty") {
+                        return false;
+                    }
+                }
+                let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                let ownPiece = colorOfLandingPiece === "w";
+                if(ownPiece){
+                    return false;
+                }
+            }
+            else{
+                for(positionXOriginal = positionXOriginal - 1, positionYOriginal = positionYOriginal - 1  ; positionXOriginal > positionXEnding ; positionXOriginal--,positionYOriginal--) {
+                    let squareAtCurrIndex = document.getElementById(board[positionXOriginal][positionYOriginal].id)
+                    let temp = squareAtCurrIndex.getElementsByTagName("img")[0].src;
+                    let pieceAtCurrIndex = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                    if(pieceAtCurrIndex != "ty") {
+                        return false;
+                    }
+                }
+                let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                let ownPiece = colorOfLandingPiece === "w";
+                if(ownPiece){
+                    return false;
+                }
+            }
+            }
         }
         
         else if(piece === "qb") {
-
+            if(positionXEnding == positionXOriginal || positionYEnding == positionYOriginal) {
+                let movedXPosition = positionXEnding - positionXOriginal != 0;
+            if(positionXEnding - positionXOriginal != 0 && positionYEnding - positionYOriginal != 0) {
+                return false;
+            }
+            if(movedXPosition){
+                let endingXPositionMoreThanOriginalXPosition = positionXEnding > positionXOriginal;
+                if(endingXPositionMoreThanOriginalXPosition) {
+                    let currXPosition = positionXOriginal + 1;
+                    for(currXPosition ; currXPosition < positionXEnding ; currXPosition++) {
+                        let squareAtCurrentPosition = document.getElementById(board[currXPosition][positionYOriginal].id)
+                        let temp = squareAtCurrentPosition.getElementsByTagName("img")[0].src;
+                        let pieceAtCurrentPosition = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                        console.log(pieceAtCurrentPosition);
+                        if(pieceAtCurrentPosition !== "ty") {
+                            return false;
+                        }
+                    }
+                    let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                    let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                    let ownPiece = colorOfLandingPiece === "b";
+                    console.log(ownPiece)
+                    if(ownPiece) {
+                        return false;
+                    }
+                 }
+                 else{
+                    let currXPosition = positionXOriginal - 1;
+                    for(currXPosition ; currXPosition > positionXEnding ; currXPosition--) {
+                        let squareAtCurrentPosition = document.getElementById(board[currXPosition][positionYOriginal].id)
+                        let temp = squareAtCurrentPosition.getElementsByTagName("img")[0].src;
+                        let pieceAtCurrentPosition = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                        if(pieceAtCurrentPosition !== "ty") {
+                            return false;
+                        }
+                    }
+                    let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                    let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                    let ownPiece = colorOfLandingPiece === "b";
+                    if(ownPiece) {
+                        return false;
+                    }
+                 }
+            }
+            else{
+                let endingYPositionMoreThanOriginalYPosition = positionYEnding > positionYOriginal;
+                if(endingYPositionMoreThanOriginalYPosition) {
+                    let currYPosition = positionYOriginal + 1;
+                    for(currYPosition ; currYPosition < positionYEnding ; currYPosition++) {
+                        let squareAtCurrentPosition = document.getElementById(board[positionXOriginal][currYPosition].id)
+                        let temp = squareAtCurrentPosition.getElementsByTagName("img")[0].src;
+                        let pieceAtCurrentPosition = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                        if(pieceAtCurrentPosition !== "ty") {
+                            return false;
+                        }
+                    }
+                    let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                    let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                    let ownPiece = colorOfLandingPiece === "b";
+                    if(ownPiece) {
+                        return false;
+                    }
+                 }
+                 else{
+                    let currYPosition = positionYOriginal - 1;
+                    for(currYPosition ; currYPosition > positionYEnding ; currYPosition--) {
+                        let squareAtCurrentPosition = document.getElementById(board[positionXOriginal][currYPosition].id)
+                        let temp = squareAtCurrentPosition.getElementsByTagName("img")[0].src;
+                        let pieceAtCurrentPosition = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                        if(pieceAtCurrentPosition !== "ty") {
+                            return false;
+                        }
+                    }
+                    let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                    let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                    let ownPiece = colorOfLandingPiece === "b";
+                    if(ownPiece) {
+                        return false;
+                    }
+                 }
+            }
+            }
+            else{
+                let endingXPositionMoreThanOriginalXPosition = positionXEnding > positionXOriginal;
+            let endingYPositionMoreThanOriginalYPosition = positionYEnding > positionYOriginal;
+            if(positionXEnding - positionYEnding != positionXOriginal - positionYOriginal && positionXOriginal + positionYOriginal != positionXEnding + positionYEnding) {
+                return false;
+            }
+            if(endingXPositionMoreThanOriginalXPosition && endingYPositionMoreThanOriginalYPosition) {
+                for(positionXOriginal = positionXOriginal + 1, positionYOriginal = positionYOriginal + 1  ; positionXOriginal < positionXEnding ; positionXOriginal++,positionYOriginal++) {
+                    let squareAtCurrIndex = document.getElementById(board[positionXOriginal][positionYOriginal].id)
+                    let temp = squareAtCurrIndex.getElementsByTagName("img")[0].src;
+                    let pieceAtCurrIndex = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                    if(pieceAtCurrIndex != "ty") {
+                        return false;
+                    }
+                }
+                let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                let ownPiece = colorOfLandingPiece === "b";
+                if(ownPiece){
+                    return false;
+                }
+            }
+            else if(endingXPositionMoreThanOriginalXPosition && !endingYPositionMoreThanOriginalYPosition) {
+                for(positionXOriginal = positionXOriginal + 1, positionYOriginal = positionYOriginal - 1  ; positionXOriginal < positionXEnding ; positionXOriginal++,positionYOriginal--) {
+                    let squareAtCurrIndex = document.getElementById(board[positionXOriginal][positionYOriginal].id)
+                    let temp = squareAtCurrIndex.getElementsByTagName("img")[0].src;
+                    let pieceAtCurrIndex = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                    if(pieceAtCurrIndex != "ty") {
+                        return false;
+                    }
+                }
+                let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                let ownPiece = colorOfLandingPiece === "b";
+                if(ownPiece){
+                    return false;
+                }
+            }
+            else if(!endingXPositionMoreThanOriginalXPosition && endingYPositionMoreThanOriginalYPosition) {
+                for(positionXOriginal = positionXOriginal - 1, positionYOriginal = positionYOriginal + 1  ; positionYOriginal < positionYEnding ; positionXOriginal--,positionYOriginal++) {
+                    let squareAtCurrIndex = document.getElementById(board[positionXOriginal][positionYOriginal].id)
+                    let temp = squareAtCurrIndex.getElementsByTagName("img")[0].src;
+                    let pieceAtCurrIndex = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                    if(pieceAtCurrIndex != "ty") {
+                        return false;
+                    }
+                }
+                let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                let ownPiece = colorOfLandingPiece === "b";
+                if(ownPiece){
+                    return false;
+                }
+            }
+            else{
+                for(positionXOriginal = positionXOriginal - 1, positionYOriginal = positionYOriginal - 1  ; positionXOriginal > positionXEnding ; positionXOriginal--,positionYOriginal--) {
+                    let squareAtCurrIndex = document.getElementById(board[positionXOriginal][positionYOriginal].id)
+                    let temp = squareAtCurrIndex.getElementsByTagName("img")[0].src;
+                    let pieceAtCurrIndex = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                    if(pieceAtCurrIndex != "ty") {
+                        return false;
+                    }
+                }
+                let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                let ownPiece = colorOfLandingPiece === "b";
+                if(ownPiece){
+                    return false;
+                }
+            }
+            }
         }
 
     
         else if(piece === "rw") {
-
+            let movedXPosition = positionXEnding - positionXOriginal != 0;
+            if(positionXEnding - positionXOriginal != 0 && positionYEnding - positionYOriginal != 0) {
+                return false;
+            }
+            if(movedXPosition){
+                let endingXPositionMoreThanOriginalXPosition = positionXEnding > positionXOriginal;
+                if(endingXPositionMoreThanOriginalXPosition) {
+                    let currXPosition = positionXOriginal + 1;
+                    for(currXPosition ; currXPosition < positionXEnding ; currXPosition++) {
+                        let squareAtCurrentPosition = document.getElementById(board[currXPosition][positionYOriginal].id)
+                        let temp = squareAtCurrentPosition.getElementsByTagName("img")[0].src;
+                        let pieceAtCurrentPosition = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                        console.log(pieceAtCurrentPosition);
+                        if(pieceAtCurrentPosition !== "ty") {
+                            return false;
+                        }
+                    }
+                    let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                    let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                    let ownPiece = colorOfLandingPiece === "w";
+                    console.log(ownPiece)
+                    if(ownPiece) {
+                        return false;
+                    }
+                 }
+                 else{
+                    let currXPosition = positionXOriginal - 1;
+                    for(currXPosition ; currXPosition > positionXEnding ; currXPosition--) {
+                        let squareAtCurrentPosition = document.getElementById(board[currXPosition][positionYOriginal].id)
+                        let temp = squareAtCurrentPosition.getElementsByTagName("img")[0].src;
+                        let pieceAtCurrentPosition = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                        if(pieceAtCurrentPosition !== "ty") {
+                            return false;
+                        }
+                    }
+                    let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                    let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                    let ownPiece = colorOfLandingPiece === "w";
+                    if(ownPiece) {
+                        return false;
+                    }
+                 }
+            }
+            else{
+                let endingYPositionMoreThanOriginalYPosition = positionYEnding > positionYOriginal;
+                if(endingYPositionMoreThanOriginalYPosition) {
+                    let currYPosition = positionYOriginal + 1;
+                    for(currYPosition ; currYPosition < positionYEnding ; currYPosition++) {
+                        let squareAtCurrentPosition = document.getElementById(board[positionXOriginal][currYPosition].id)
+                        let temp = squareAtCurrentPosition.getElementsByTagName("img")[0].src;
+                        let pieceAtCurrentPosition = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                        if(pieceAtCurrentPosition !== "ty") {
+                            return false;
+                        }
+                    }
+                    let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                    let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                    let ownPiece = colorOfLandingPiece === "w";
+                    if(ownPiece) {
+                        return false;
+                    }
+                 }
+                 else{
+                    let currYPosition = positionYOriginal - 1;
+                    for(currYPosition ; currYPosition > positionYEnding ; currYPosition--) {
+                        let squareAtCurrentPosition = document.getElementById(board[positionXOriginal][currYPosition].id)
+                        let temp = squareAtCurrentPosition.getElementsByTagName("img")[0].src;
+                        let pieceAtCurrentPosition = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                        if(pieceAtCurrentPosition !== "ty") {
+                            return false;
+                        }
+                    }
+                    let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                    let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                    let ownPiece = colorOfLandingPiece === "w";
+                    if(ownPiece) {
+                        return false;
+                    }
+                 }
+            }
         }
-
         else {
-
+            let movedXPosition = positionXEnding - positionXOriginal != 0;
+            if(positionXEnding - positionXOriginal != 0 && positionYEnding - positionYOriginal != 0) {
+                return false;
+            }
+            if(movedXPosition){
+                let endingXPositionMoreThanOriginalXPosition = positionXEnding > positionXOriginal;
+                if(endingXPositionMoreThanOriginalXPosition) {
+                    let currXPosition = positionXOriginal + 1;
+                    for(currXPosition ; currXPosition < positionXEnding ; currXPosition++) {
+                        let squareAtCurrentPosition = document.getElementById(board[currXPosition][positionYOriginal].id)
+                        let temp = squareAtCurrentPosition.getElementsByTagName("img")[0].src;
+                        let pieceAtCurrentPosition = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                        console.log(pieceAtCurrentPosition);
+                        if(pieceAtCurrentPosition !== "ty") {
+                            return false;
+                        }
+                    }
+                    let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                    let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                    let ownPiece = colorOfLandingPiece === "b";
+                    console.log(ownPiece)
+                    if(ownPiece) {
+                        return false;
+                    }
+                 }
+                 else{
+                    let currXPosition = positionXOriginal - 1;
+                    for(currXPosition ; currXPosition > positionXEnding ; currXPosition--) {
+                        let squareAtCurrentPosition = document.getElementById(board[currXPosition][positionYOriginal].id)
+                        let temp = squareAtCurrentPosition.getElementsByTagName("img")[0].src;
+                        let pieceAtCurrentPosition = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                        if(pieceAtCurrentPosition !== "ty") {
+                            return false;
+                        }
+                    }
+                    let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                    let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                    let ownPiece = colorOfLandingPiece === "b";
+                    if(ownPiece) {
+                        return false;
+                    }
+                 }
+            }
+            else{
+                let endingYPositionMoreThanOriginalYPosition = positionYEnding > positionYOriginal;
+                if(endingYPositionMoreThanOriginalYPosition) {
+                    let currYPosition = positionYOriginal + 1;
+                    for(currYPosition ; currYPosition < positionYEnding ; currYPosition++) {
+                        let squareAtCurrentPosition = document.getElementById(board[positionXOriginal][currYPosition].id)
+                        let temp = squareAtCurrentPosition.getElementsByTagName("img")[0].src;
+                        let pieceAtCurrentPosition = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                        if(pieceAtCurrentPosition !== "ty") {
+                            return false;
+                        }
+                    }
+                    let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                    let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                    let ownPiece = colorOfLandingPiece === "b";
+                    if(ownPiece) {
+                        return false;
+                    }
+                 }
+                 else{
+                    let currYPosition = positionYOriginal - 1;
+                    for(currYPosition ; currYPosition > positionYEnding ; currYPosition--) {
+                        let squareAtCurrentPosition = document.getElementById(board[positionXOriginal][currYPosition].id)
+                        let temp = squareAtCurrentPosition.getElementsByTagName("img")[0].src;
+                        let pieceAtCurrentPosition = temp.substring(temp.indexOf(".svg")-2,temp.indexOf(".svg"));
+                        if(pieceAtCurrentPosition !== "ty") {
+                            return false;
+                        }
+                    }
+                    let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
+                    let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
+                    let ownPiece = colorOfLandingPiece === "b";
+                    if(ownPiece) {
+                        return false;
+                    }
+                 }
+            }
         }
         movesSinceEnPessantOpened++;
         return true;
