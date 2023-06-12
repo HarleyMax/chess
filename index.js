@@ -13,10 +13,10 @@ let enPessant = "";
 let movesSinceEnPessantOpened = 0;
 
 //This will keep track if certain castling moves can still occur
-let whiteShortCastle = true;
-let whiteLongCastle = true;
-let blackShortCastle = true;
-let blackLongCastle = true;
+let whiteLeftCastle = true;
+let whiteRightCastle = true;
+let blackLeftCastle = true;
+let blackRightCastle = true;
 
 // Initialize the chess board as an array and add eventListeners for squares
 let board = new Array(8);
@@ -385,11 +385,17 @@ function handleDrop(event) {
             let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
             let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
             let ownPiece = colorOfLandingPiece === "w";
-            if(target.id === "c1" && emptyLeftCastlingArea && whiteLongCastle) {
+            if(target.id === "c1" && emptyLeftCastlingArea && whiteLeftCastle) {
                 document.getElementById("e1").getElementsByTagName("img")[0].src = "piece-icons/empty.svg";
                 document.getElementById("a1").getElementsByTagName("img")[0].src = "piece-icons/empty.svg";
                 document.getElementById("c1").getElementsByTagName("img")[0].src = "piece-icons/kw.svg"
                 document.getElementById("d1").getElementsByTagName("img")[0].src = "piece-icons/rw.svg"
+            }
+            if(target.id === "g1" && emptyRightCastlingArea && whiteRightCastle) {
+                document.getElementById("e1").getElementsByTagName("img")[0].src = "piece-icons/empty.svg";
+                document.getElementById("h1").getElementsByTagName("img")[0].src = "piece-icons/empty.svg";
+                document.getElementById("g1").getElementsByTagName("img")[0].src = "piece-icons/kw.svg";
+                document.getElementById("f1").getElementsByTagName("img")[0].src = "piece-icons/rw.svg";
             }
             if(ownPiece){
                 return false;
@@ -409,10 +415,36 @@ function handleDrop(event) {
         }
 
         else if(piece === "kb") {
+            let temp1 = document.getElementById("c8").getElementsByTagName("img")[0].src;
+            let emptyLeftBishopSquare = temp1.substring(temp1.indexOf(".svg")-2,temp1.indexOf(".svg")-0) === "ty";
+            let temp2 = document.getElementById("b8").getElementsByTagName("img")[0].src
+            let emptyLeftKnightSquare = temp2.substring(temp2.indexOf(".svg")-2,temp2.indexOf(".svg")-0) === "ty";
+            let temp3 = document.getElementById("d8").getElementsByTagName("img")[0].src
+            let emptyQueenSquare = temp3.substring(temp3.indexOf(".svg")-2,temp3.indexOf(".svg")-0) === "ty";
+            let temp4 = document.getElementById("f8").getElementsByTagName("img")[0].src
+            let emptyRightBishopSquare = temp4.substring(temp4.indexOf(".svg")-2,temp4.indexOf(".svg")-0) === "ty";
+            let temp5 = document.getElementById("g8").getElementsByTagName("img")[0].src
+            let emptyRightKnightSquare = temp5.substring(temp5.indexOf(".svg")-2,temp5.indexOf(".svg")-0) === "ty";
+
+            let emptyLeftCastlingArea = emptyLeftBishopSquare && emptyLeftKnightSquare && emptyQueenSquare;
+            let emptyRightCastlingArea = emptyRightBishopSquare && emptyRightKnightSquare;
+
             let movedXPosition = positionXEnding - positionXOriginal != 0
             let temp = document.getElementById(target.id).getElementsByTagName("img")[0].src
             let colorOfLandingPiece = temp.substring(temp.indexOf(".svg")-1,temp.indexOf(".svg")-0);
             let ownPiece = colorOfLandingPiece === "b";
+            if(target.id === "c8" && emptyLeftCastlingArea && blackLeftCastle) {
+                document.getElementById("e8").getElementsByTagName("img")[0].src = "piece-icons/empty.svg";
+                document.getElementById("a8").getElementsByTagName("img")[0].src = "piece-icons/empty.svg";
+                document.getElementById("c8").getElementsByTagName("img")[0].src = "piece-icons/kb.svg"
+                document.getElementById("d8").getElementsByTagName("img")[0].src = "piece-icons/rb.svg"
+            }
+            if(target.id === "g1" && emptyRightCastlingArea && blackRightCastle) {
+                document.getElementById("e8").getElementsByTagName("img")[0].src = "piece-icons/empty.svg";
+                document.getElementById("h8").getElementsByTagName("img")[0].src = "piece-icons/empty.svg";
+                document.getElementById("g8").getElementsByTagName("img")[0].src = "piece-icons/kb.svg";
+                document.getElementById("f8").getElementsByTagName("img")[0].src = "piece-icons/rb.svg";
+            }
             if(ownPiece){
                 return false;
             }
